@@ -1,0 +1,31 @@
+# HerWILL Safe Social Media Datathon 2026 - Python packages
+#
+# On Google Colab nothing needs to be installed by hand:
+# notebook cell 0.1 installs the pinned packages below automatically.
+# This file documents the versions, and is for running outside Colab.
+#
+# Tested on: Google Colab, Python 3.13.5, Tesla T4 GPU (15,360 MiB reported by nvidia-smi).
+
+# ---- Pinned (installed by cell 0.1) ----
+# scikit-learn is pinned because the frozen 5-fold split is reproduced exactly
+# by scikit-learn 1.7.2 (tested: 1.6.1 and 1.7.2 give identical folds; 1.8.0 and 1.9.1 shuffle StratifiedGroupKFold differently).
+scikit-learn==1.7.2
+transformers==5.16.1
+datasets==5.0.1
+peft==0.21.0
+
+# BanglishBERT text normalizer (csebuetnlp), pinned to one commit
+normalizer @ git+https://github.com/csebuetnlp/normalizer@d405944dde5ceeacb7c2fd3245ae2a9dea5f35c9
+
+# ---- Preinstalled on Colab (not pinned) ----
+torch>=2.0
+accelerate>=1.0     # used by the transformers Trainer
+numpy>=2.0
+pandas>=2.2
+scipy
+joblib
+matplotlib
+sentencepiece       # XLM-RoBERTa tokenizer
+
+# Colab preinstalls torchao 0.10, which peft 0.21 rejects when adding LoRA layers (Gemma).
+# Cell 0.1 uninstalls torchao < 0.16 automatically. This project does not use torchao.
